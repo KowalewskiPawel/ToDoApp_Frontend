@@ -1,6 +1,8 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Title from "./components/Title";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 import "./App.scss";
 
@@ -22,47 +24,6 @@ export default function App() {
         </Switch>
       </div>
     </Router>
-  );
-}
-
-function Login() {
-  return (
-    <div className="loginForm">
-      <h1>Login</h1>
-      <input
-        id="username"
-        type="text"
-        placeholder="Email or Username"
-        required
-      />
-      <input id="pass" type="password" placeholder="Password" />
-      <button>Login</button>
-      <p>or</p>
-      <Link id="link" to="/register">
-        create an account
-      </Link>
-    </div>
-  );
-}
-
-function Register() {
-  return (
-    <div className="registerForm">
-      <Link id="link" to="/">
-        ←
-      </Link>
-      <h1>Create a new account</h1>
-      <input id="username" type="text" placeholder="Username" required />
-      <input id="email" type="text" placeholder="Email" required />
-      <input id="password" type="password" placeholder="Password" required />
-      <input
-        id="confirmPass"
-        type="password"
-        placeholder="Confirm password"
-        required
-      />
-      <button>Create</button>
-    </div>
   );
 }
 
