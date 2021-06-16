@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import userService from "../services/user.service";
 
+import NewModal from "./NewModal";
+
 function ToDoList() {
   const [todos, setTodos] = useState([]);
 
@@ -54,6 +56,7 @@ function ToDoList() {
           );
         })
       )}
+      <NewModal />
     </div>
   );
 }
