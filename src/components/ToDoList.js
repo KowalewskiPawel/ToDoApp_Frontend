@@ -36,14 +36,22 @@ function ToDoList() {
             new Date(todo.published_at)
           );
           let date = tempDate.split("/").join("-");
-          for (let tasks of todo.task)
-            return (
-              <div key={index}>
-                <span>{todo.name}</span>
-                <em>Created at: {date}</em>
-                <span>All: {todo.task.length}</span>
-              </div>
-            );
+          let comp = 0;
+          for (let tasks of todo.task) {
+            if (tasks.isDone) {
+              comp++;
+            }
+          }
+          return (
+            <div className="todo" key={index}>
+              <span id="todoName">{todo.name}</span>
+              <em id="createdAt">Created at: {date}</em>
+              <span id="tasksCount">
+                Completed: {comp} Uncompleted: {todo.task.length - comp} All:{" "}
+                {todo.task.length}
+              </span>
+            </div>
+          );
         })
       )}
     </div>
