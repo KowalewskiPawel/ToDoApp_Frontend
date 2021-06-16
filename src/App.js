@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Title from "./components/Title";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import ToDoList from "./components/ToDoList";
 
 import "./App.scss";
 
@@ -15,8 +16,8 @@ export default function App() {
           <Route path="/register">
             <Register />
           </Route>
-          <Route path="/users">
-            <Users />
+          <Route path="/todos">
+            <ToDoList />
           </Route>
           <Route path="/">
             <Login />
@@ -25,8 +26,4 @@ export default function App() {
       </div>
     </Router>
   );
-}
-
-function Users() {
-  return <h2>Users</h2>;
 }
