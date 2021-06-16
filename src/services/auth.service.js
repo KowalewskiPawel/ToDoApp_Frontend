@@ -3,18 +3,17 @@ import axios from "axios";
 const API_URL = "https://recruitment.ultimate.systems/auth/local";
 
 class AuthService {
-  login(username, password) {
+  login(identifier, password) {
     return axios
       .post(API_URL, {
-        username,
+        identifier,
         password,
       })
       .then((response) => {
-        if (response.jwt) {
-          localStorage.setItem("user", JSON.stringify(response));
+        if (response.data.jwt) {
+          localStorage.setItem("user", JSON.stringify(response.data.jwt));
+          return;
         }
-
-        return response;
       });
   }
 

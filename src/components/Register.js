@@ -41,8 +41,8 @@ function Register() {
         console.log(response);
         setSuccessful(true);
       },
-      (error) => {
-        console.log(error);
+      (err) => {
+        console.error(err);
         setMessage(
           "Error :( User already exists or there is some network problem."
         );
