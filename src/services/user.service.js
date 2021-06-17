@@ -9,6 +9,12 @@ class UserService {
       headers: authHeader(),
     });
   }
+
+  addNewList() {
+    return axios.post(API_URL, {
+      headers: authHeader(),
+    });
+  }
 }
 
 export default new UserService();

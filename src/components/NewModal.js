@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 
 const customStyles = {
@@ -12,8 +12,10 @@ const customStyles = {
     borderRadius: "5px",
     boxShadow: "0 3rem 5rem rgba(0, 0, 0, 0.3)",
     textAlign: "center",
-    width: "auto",
-    height: "400px",
+    width: "50%",
+    height: "80%",
+
+    background: "#2D2D2D",
     maxHeight: "60vh !important",
     maxWidth: "80%",
   },
@@ -22,7 +24,12 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 export default function NewModal() {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const [finished, setFinished] = useState(false);
+  const [taskName, setTaskName] = useState("");
+  const [tasks, setTasks] = useState([]);
+
   function openModal() {
     setIsOpen(true);
     document.getElementById("root").style.filter = "blur(5px)";
@@ -37,6 +44,20 @@ export default function NewModal() {
     document.getElementById("root").style.filter = "blur(0px)";
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newTask = {
+      id: "string",
+      name: taskName,
+      isDone: finished,
+    };
+
+    setTasks((prevState) => [...prevState, newTask]);
+    setTaskName("");
+    setFinished(false);
+  };
+
   return (
     <>
       <button id="modal" onClick={openModal}></button>
@@ -45,7 +66,51 @@ export default function NewModal() {
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
-      ></Modal>
+      >
+        <div>
+          <input type="text" placeholder="List name" required />
+          <hr />
+          {tasks.length > 0
+            ? tasks.map((task, index) => {
+                return (
+                  <div key={index}>
+                    <form>
+                      <input
+                        type="checkbox"
+                        id="finished"
+                        defaultChecked={task.isDone}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Task name"
+                        value={task.name}
+                        required
+                      />
+                    </form>
+                  </div>
+                );
+              })
+            : ""}
+          <form onSubmit={handleSubmit}>
+            <input
+              type="checkbox"
+              id="finished"
+              value={finished}
+              onChange={(e) => setFinished(e.target.checked)}
+              checked={finished}
+              defaultChecked={finished}
+            />
+            <input
+              type="text"
+              placeholder="Task name"
+              value={taskName}
+              onChange={(e) => setTaskName(e.target.value)}
+              required
+            />
+            <input type="submit" value="ADD" />
+          </form>
+        </div>
+      </Modal>
     </>
   );
 }
