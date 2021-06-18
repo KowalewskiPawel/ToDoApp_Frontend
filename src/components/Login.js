@@ -13,7 +13,7 @@ function Login() {
 
     AuthService.login(user, password).then(
       (response) => {
-        console.log(response);
+        window.location.reload();
       },
       (err) => {
         console.error(err);

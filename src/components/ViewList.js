@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 
+import userService from "../services/user.service";
+
 const customStyles = {
   content: {
     position: "relative",
@@ -23,12 +25,17 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-export default function NewModal() {
+export default function ViewList(props) {
   const [modalIsOpen, setIsOpen] = useState(false);
 
+  const [listName, setListName] = useState("");
   const [finished, setFinished] = useState(false);
   const [taskName, setTaskName] = useState("");
   const [tasks, setTasks] = useState([]);
+
+  const [message, setMessage] = useState("");
+
+  const { id } = props;
 
   function openModal() {
     setIsOpen(true);
@@ -44,11 +51,10 @@ export default function NewModal() {
     document.getElementById("root").style.filter = "blur(0px)";
   }
 
-  const handleSubmit = (event) => {
+  const handleAddTask = (event) => {
     event.preventDefault();
 
     const newTask = {
-      id: "string",
       name: taskName,
       isDone: finished,
     };
@@ -57,6 +63,45 @@ export default function NewModal() {
     setTaskName("");
     setFinished(false);
   };
+
+  const removeTask = (index) => {
+    const newList = tasks.filter((_, idx) => {
+      return idx !== index;
+    });
+    setTasks([...newList]);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (!listName) {
+      setMessage("Please enter the name of the list");
+      return;
+    }
+
+    userService.updateList(id, listName, tasks).then(
+      (response) => {
+        props.refreshList();
+        closeModal();
+      },
+      (err) => {
+        console.error(err);
+        setMessage("Something went wrong :(");
+      }
+    );
+  };
+
+  useEffect(() => {
+    userService.getList(id).then(
+      (response) => {
+        setListName(response.data.name);
+        setTasks([...response.data.task]);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }, [id]);
 
   return (
     <>
@@ -68,7 +113,13 @@ export default function NewModal() {
         style={customStyles}
       >
         <div>
-          <input type="text" placeholder="List name" required />
+          <input
+            type="text"
+            placeholder="List name"
+            onChange={(e) => setListName(e.target.value)}
+            value={listName}
+            required
+          />
           <hr />
           {tasks.length > 0
             ? tasks.map((task, index) => {
@@ -78,27 +129,30 @@ export default function NewModal() {
                       <input
                         type="checkbox"
                         id="finished"
+                        onChange={() => (task.isDone = !task.isDone)}
                         defaultChecked={task.isDone}
                       />
                       <input
                         type="text"
                         placeholder="Task name"
-                        value={task.name}
-                        required
+                        onChange={(e) => (task.name = e.target.value)}
+                        defaultValue={task.name}
                       />
                     </form>
+                    <button onClick={() => removeTask(index)}>
+                      REMOVE TASK
+                    </button>
                   </div>
                 );
               })
             : ""}
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleAddTask}>
             <input
               type="checkbox"
               id="finished"
               value={finished}
               onChange={(e) => setFinished(e.target.checked)}
               checked={finished}
-              defaultChecked={finished}
             />
             <input
               type="text"
@@ -109,6 +163,13 @@ export default function NewModal() {
             />
             <input type="submit" value="ADD" />
           </form>
+          {message ? <p>{message}</p> : ""}
+          <button id="cancel" onClick={() => closeModal()}>
+            CANCEL
+          </button>
+          <button id="save" onClick={handleSubmit}>
+            SAVE
+          </button>
         </div>
       </Modal>
     </>
