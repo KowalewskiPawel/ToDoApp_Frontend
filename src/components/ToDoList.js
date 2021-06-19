@@ -47,147 +47,10 @@ function ToDoList() {
     );
   };
 
-  useEffect(() => {
-    refreshList();
-  }, []);
-
-  useEffect(() => {
-    function sortList() {
-      if (filteredTodos.length > 0) {
-        const tempList = [...filteredTodos];
-        switch (sort) {
-          case "nameDes":
-            tempList.sort((a, b) => {
-              let nameA = a.name.toUpperCase();
-              let nameB = b.name.toUpperCase();
-              if (nameA < nameB) {
-                return -1;
-              }
-              if (nameA > nameB) {
-                return 1;
-              }
-              return 0;
-            });
-            break;
-          case "nameAsc":
-            tempList.sort((a, b) => {
-              let nameA = a.name.toUpperCase();
-              let nameB = b.name.toUpperCase();
-              if (nameA < nameB) {
-                return 1;
-              }
-              if (nameA > nameB) {
-                return -1;
-              }
-              return 0;
-            });
-            break;
-          case "dateDes":
-            tempList.sort((a, b) => {
-              return new Date(a.created_at) - new Date(b.created_at);
-            });
-            break;
-          case "dateAsc":
-            tempList.sort((a, b) => {
-              return new Date(b.created_at) - new Date(a.created_at);
-            });
-            break;
-          case "allDes":
-            tempList.sort((a, b) => {
-              return b.task.length - a.task.length;
-            });
-            break;
-          case "allAsc":
-            tempList.sort((a, b) => {
-              return a.task.length - b.task.length;
-            });
-            break;
-          case "completedDes":
-            tempList.sort((a, b) => {
-              let compA = 0;
-              let compB = 0;
-              for (let tasks of a.task) {
-                if (tasks.isDone) {
-                  compA++;
-                }
-              }
-              for (let tasks of b.task) {
-                if (tasks.isDone) {
-                  compB++;
-                }
-              }
-
-              return compB - compA;
-            });
-            break;
-          case "completedAsc":
-            tempList.sort((a, b) => {
-              let compA = 0;
-              let compB = 0;
-              for (let tasks of a.task) {
-                if (tasks.isDone) {
-                  compA++;
-                }
-              }
-              for (let tasks of b.task) {
-                if (tasks.isDone) {
-                  compB++;
-                }
-              }
-
-              return compA - compB;
-            });
-            break;
-
-          case "uncompletedDes":
-            tempList.sort((a, b) => {
-              let uncompA = 0;
-              let uncompB = 0;
-              for (let tasks of a.task) {
-                if (!tasks.isDone) {
-                  uncompA++;
-                }
-              }
-              for (let tasks of b.task) {
-                if (!tasks.isDone) {
-                  uncompB++;
-                }
-              }
-
-              return uncompB - uncompA;
-            });
-            break;
-
-          case "uncompletedAsc":
-            tempList.sort((a, b) => {
-              let uncompA = 0;
-              let uncompB = 0;
-              for (let tasks of a.task) {
-                if (!tasks.isDone) {
-                  uncompA++;
-                }
-              }
-              for (let tasks of b.task) {
-                if (!tasks.isDone) {
-                  uncompB++;
-                }
-              }
-
-              return uncompA - uncompB;
-            });
-            break;
-
-          default:
-            break;
-        }
-        setFilteredTodos([...tempList]);
-        return;
-      }
-      const tempList = [...todos];
+  function sortList() {
+    if (filteredTodos.length > 0) {
+      const tempList = [...filteredTodos];
       switch (sort) {
-        case "":
-          refreshList();
-          break;
         case "nameDes":
           tempList.sort((a, b) => {
             let nameA = a.name.toUpperCase();
@@ -312,9 +175,146 @@ function ToDoList() {
         default:
           break;
       }
-      setTodos([...tempList]);
+      setFilteredTodos([...tempList]);
+      return;
     }
+    const tempList = [...todos];
+    switch (sort) {
+      case "":
+        refreshList();
+        break;
+      case "nameDes":
+        tempList.sort((a, b) => {
+          let nameA = a.name.toUpperCase();
+          let nameB = b.name.toUpperCase();
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+      case "nameAsc":
+        tempList.sort((a, b) => {
+          let nameA = a.name.toUpperCase();
+          let nameB = b.name.toUpperCase();
+          if (nameA < nameB) {
+            return 1;
+          }
+          if (nameA > nameB) {
+            return -1;
+          }
+          return 0;
+        });
+        break;
+      case "dateDes":
+        tempList.sort((a, b) => {
+          return new Date(a.created_at) - new Date(b.created_at);
+        });
+        break;
+      case "dateAsc":
+        tempList.sort((a, b) => {
+          return new Date(b.created_at) - new Date(a.created_at);
+        });
+        break;
+      case "allDes":
+        tempList.sort((a, b) => {
+          return b.task.length - a.task.length;
+        });
+        break;
+      case "allAsc":
+        tempList.sort((a, b) => {
+          return a.task.length - b.task.length;
+        });
+        break;
+      case "completedDes":
+        tempList.sort((a, b) => {
+          let compA = 0;
+          let compB = 0;
+          for (let tasks of a.task) {
+            if (tasks.isDone) {
+              compA++;
+            }
+          }
+          for (let tasks of b.task) {
+            if (tasks.isDone) {
+              compB++;
+            }
+          }
 
+          return compB - compA;
+        });
+        break;
+      case "completedAsc":
+        tempList.sort((a, b) => {
+          let compA = 0;
+          let compB = 0;
+          for (let tasks of a.task) {
+            if (tasks.isDone) {
+              compA++;
+            }
+          }
+          for (let tasks of b.task) {
+            if (tasks.isDone) {
+              compB++;
+            }
+          }
+
+          return compA - compB;
+        });
+        break;
+
+      case "uncompletedDes":
+        tempList.sort((a, b) => {
+          let uncompA = 0;
+          let uncompB = 0;
+          for (let tasks of a.task) {
+            if (!tasks.isDone) {
+              uncompA++;
+            }
+          }
+          for (let tasks of b.task) {
+            if (!tasks.isDone) {
+              uncompB++;
+            }
+          }
+
+          return uncompB - uncompA;
+        });
+        break;
+
+      case "uncompletedAsc":
+        tempList.sort((a, b) => {
+          let uncompA = 0;
+          let uncompB = 0;
+          for (let tasks of a.task) {
+            if (!tasks.isDone) {
+              uncompA++;
+            }
+          }
+          for (let tasks of b.task) {
+            if (!tasks.isDone) {
+              uncompB++;
+            }
+          }
+
+          return uncompA - uncompB;
+        });
+        break;
+
+      default:
+        break;
+    }
+    setTodos([...tempList]);
+  }
+
+  useEffect(() => {
+    refreshList();
+  }, []);
+
+  useEffect(() => {
     return sortList();
     // eslint-disable-next-line
   }, [sort]);
@@ -361,8 +361,10 @@ function ToDoList() {
           }
           return (
             <div className="todo" key={index}>
+              <button id="deleteButton" onClick={() => handleDelete(todoId)}>
+                DELETE
+              </button>
               <ViewList refreshList={refreshList} id={todo.id} />
-              <button onClick={() => handleDelete(todoId)}>DELETE</button>
               <span id="todoName">{todo.name}</span>
               <em id="createdAt">Created at: {date}</em>
               <span id="tasksCount">

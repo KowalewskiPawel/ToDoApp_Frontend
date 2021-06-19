@@ -1,4 +1,5 @@
 import AuthService from "../services/auth.service";
+import doors from "../assets/logout.png";
 
 function Title(props) {
   const logout = () => {
@@ -7,10 +8,14 @@ function Title(props) {
   };
 
   return (
-    <>
-      <h1 className="title">ToDo-List</h1>
-      {props.user ? <button onClick={() => logout()}>LOGOUT</button> : ""}
-    </>
+    <div className="title">
+      <h1>ToDo-List</h1>
+      {props.user ? (
+        <img src={doors} onClick={logout} alt="Logout Button" />
+      ) : (
+        ""
+      )}
+    </div>
   );
 }
 

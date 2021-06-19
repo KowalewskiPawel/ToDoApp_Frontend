@@ -3,25 +3,38 @@ html {
   color: #ff9900;
 }
 
+input[type="text"]:focus {
+  outline: none;
+}
+
 .title {
   color: #ff9900;
-  width: 333px;
-  height: 64px;
   margin-left: 1rem;
   margin-top: 1rem;
 
   font-family: ZCOOL KuaiLe;
   font-style: normal;
   font-weight: normal;
-  font-size: 64px;
-  line-height: 64px;
 
   padding-bottom: 2rem;
+  img {
+    position: relative;
+    top: -4rem;
+    left: 80%;
+    transition: transform 400ms ease-in-out;
+  }
+  img:hover {
+    filter: contrast(200%);
+  }
+  img:active {
+    transform: scale(0.9);
+  }
 }
 
 @mixin forms {
-  width: 893px;
-  height: 1045px;
+  width: 60vw;
+  height: auto;
+  min-height: 80vh;
   margin: auto;
 
   font-family: roboto;
@@ -31,37 +44,46 @@ html {
   background: #2d2d2d;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
-  h1 {
-    width: 893px;
-    height: 75px;
 
+  form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+  }
+  h1 {
     font-family: Roboto;
     font-style: normal;
-    font-weight: bold;
-    font-size: 64px;
-    line-height: 75px;
-
+    font-weight: 700;
     text-align: center;
+
+    padding: 4%;
 
     color: #ff9900;
   }
   input {
-    width: 600px;
-    height: 50px;
-
+    width: 30vw;
+    height: auto;
     background: #ffffff;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 8px;
+    border-radius: 4px;
+    border: solid black 1px;
+    padding: 2%;
+    margin: 1rem auto 1rem auto;
   }
 
   #submitBtn {
-    width: 315px;
-    height: 89px;
-    left: 802px;
-    top: 777px;
+    width: 20vw;
+    height: auto;
     color: #ffffff;
     background: #ff9900;
-    border-radius: 8px;
+    border-radius: 4px;
+    transition: transform 100ms ease-in-out;
+  }
+  #submitBtn:hover {
+    filter: contrast(200%);
+  }
+  #submitBtn:active {
+    transform: scale(0.9);
   }
   * {
     margin: 20px;
@@ -72,29 +94,17 @@ html {
   @include forms;
 
   p {
-    width: 22px;
-    height: 28px;
-    margin: auto;
+    margin: auto auto 5% auto;
 
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    font-size: 24px;
-    line-height: 28px;
 
     color: #ffffff;
   }
   #link {
-    width: 378px;
-    height: 56px;
-    left: 761px;
-    top: 1021px;
-
     font-family: Roboto;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 48px;
-    line-height: 56px;
+    font-size: 1.4rem;
 
     color: #ff9900;
     text-decoration: none;
@@ -104,34 +114,50 @@ html {
 .registerForm {
   @include forms;
   #link {
-    width: 67px;
-    height: auto;
-
-    font-size: 60px;
-
     margin: 10px 800px 10px 10px;
-
+    font-size: 3rem;
     color: #ffffff;
     text-decoration: none;
   }
 }
 
 .todoForm {
-  width: 893px;
-  height: 1045px;
+  width: 60vw;
+  height: auto;
+  min-height: 80vh;
   margin: auto;
-  input {
-    margin-left: 1rem;
-  }
   select {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    padding: 0.8rem 1rem 0.8rem 1rem;
+    margin: 0.4rem;
+    border: solid black 2px;
+    border-radius: 8px;
+    background: url("./assets/arrow.png") right center no-repeat;
+    background-color: white;
+    background-position: left center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     text-align: center;
     float: right;
+  }
+  input {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    margin-left: 1rem;
+    padding: 0.8rem 1rem 0.8rem 1rem;
+    margin: 0.4rem;
+    border: solid black 2px;
+    border-radius: 8px;
   }
 
   .todo {
     margin: 1rem;
-    width: 893px;
-    height: 100px;
+    width: 100%;
+    height: 10vh;
     font-family: Roboto;
 
     color: #ffffff;
@@ -142,26 +168,265 @@ html {
 
     background: #2d2d2d;
     border-radius: 8px;
+
+    transition: transform 400ms ease-in-out;
+
+    button {
+      border: black solid 0px;
+      background: #ff3d00;
+      padding: 0.4rem;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 4px;
+      margin: 4px;
+      color: white;
+      font-weight: bold;
+      opacity: 0;
+    }
+
+    #viewButton {
+      border: black solid 1px;
+      background: #ff9900;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 4px;
+      margin: 4px;
+    }
+
     #todoName {
       margin-left: 2rem;
       margin-right: auto;
       font-weight: bold;
-      font-size: 24px;
+      font-size: 1.5rem;
     }
     #createdAt {
       margin: auto;
       font-family: Roboto;
       font-style: italic;
       font-weight: normal;
-      font-size: 24px;
+      font-size: 1.5rem;
     }
     #tasksCount {
       font-family: Roboto;
       font-style: normal;
       font-weight: normal;
-      font-size: 24px;
+      font-size: 1.5rem;
       margin-left: auto;
       margin-right: 2rem;
+    }
+  }
+
+  .todo:hover {
+    transform: scale(1.02);
+    button {
+      opacity: 100;
+      transition: transform 100ms ease-in-out;
+    }
+    button:hover {
+      filter: contrast(200%);
+    }
+    button:active {
+      transform: scale(0.9);
+    }
+  }
+
+  #newList {
+    position: fixed;
+    top: 80%;
+    left: 80%;
+    width: 70px;
+    height: 70px;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: solid black 0px;
+    border-radius: 50%;
+    transition: transform 100ms ease-in-out;
+    #hor {
+      position: relative;
+      bottom: -40%;
+      margin: auto;
+      align-self: flex-end;
+      width: 50px;
+      height: 1px;
+      background-color: #ff9900;
+      border: 5px solid #ff9900;
+      border-radius: 10px;
+    }
+    #ver {
+      position: relative;
+      bottom: 10%;
+      margin: auto;
+      align-self: flex-end;
+      width: 1px;
+      height: 50px;
+      background-color: #ff9900;
+      border: 5px solid #ff9900;
+      border-radius: 10px;
+    }
+  }
+
+  #newList:hover {
+    filter: contrast(200%);
+  }
+  #newList:active {
+    transform: scale(0.9);
+  }
+}
+
+.modal {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  #listName {
+    width: 98%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 0.4rem;
+    padding: 0.3rem;
+    border: solid black 0px;
+    border-radius: 2px;
+  }
+  hr {
+    width: 99%;
+    color: #ff9900;
+    border: 1px solid #ff9900;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  form {
+    input {
+      background: transparent;
+      box-shadow: none;
+      color: white;
+    }
+
+    #finished {
+      border: solid black 2px;
+      background: #2d2d2d;
+    }
+
+    #taskName {
+      width: 95%;
+      height: auto;
+      width: 95%;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: solid orange 1px;
+      margin-bottom: 0.6rem;
+    }
+    #add {
+      display: block;
+      margin-left: 89%;
+      background: #ff9900;
+      border: solid black 0px;
+      font-weight: 400;
+      padding: 0.2rem 1rem 0.2rem 1rem;
+      font-size: large;
+      border-radius: 4px;
+    }
+    #add:hover {
+      filter: contrast(200%);
+    }
+    #add:active {
+      transform: scale(0.9);
+    }
+  }
+
+  #remove {
+    display: block;
+    margin-left: 84%;
+    background: #ff3d00;
+    border: solid black 0px;
+    font-weight: 400;
+    padding: 0.2rem 1rem 0.2rem 1rem;
+    font-size: large;
+    border-radius: 4px;
+
+    transition: transform 100ms ease-in-out;
+  }
+
+  #remove:hover {
+    filter: contrast(200%);
+  }
+  #remove:active {
+    transform: scale(0.9);
+  }
+
+  #cancel {
+    position: fixed;
+    top: 90%;
+    right: 80%;
+    border: none;
+    background: transparent;
+    padding: 0.4rem;
+    margin: 4px;
+    color: #ff9900;
+    font-size: 2rem;
+  }
+  #cancel:hover {
+    filter: contrast(200%);
+  }
+  #save {
+    position: fixed;
+    top: 90%;
+    left: 80%;
+    background: #ff9900;
+    border: solid black 0px;
+    border-radius: 4px;
+    margin: 4px;
+    padding: 0.4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin: 4px;
+    color: white;
+    font-size: 2rem;
+  }
+  #save:hover {
+    filter: contrast(200%);
+  }
+  #save:active {
+    transform: scale(0.9);
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .title {
+    img {
+      left: 70%;
+    }
+  }
+  .todoForm {
+    width: 90%;
+    * {
+      font-size: 0.6rem;
+    }
+    .todo {
+      #taskName {
+        font-size: 0.5rem;
+        margin-right: 0.5rem;
+      }
+      #createdAt {
+        font-size: 0.7rem;
+      }
+      #tasksCount {
+        font-size: 0.8rem;
+      }
+    }
+    #newList {
+      left: 70%;
+    }
+  }
+  .modal {
+    form {
+      #add {
+        margin-left: 80%;
+      }
+    }
+    #cancel {
+      right: 60%;
+    }
+    #save {
+      left: 58%;
+      font-size: 2rem;
     }
   }
 }

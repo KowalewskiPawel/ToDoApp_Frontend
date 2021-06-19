@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 
+import box from "../assets/box.png";
+import checked from "../assets/checked.png";
+
 import userService from "../services/user.service";
 
 const customStyles = {
@@ -14,13 +17,23 @@ const customStyles = {
     borderRadius: "5px",
     boxShadow: "0 3rem 5rem rgba(0, 0, 0, 0.3)",
     textAlign: "center",
-    width: "50%",
+    width: "auto",
     height: "80%",
 
     background: "#2D2D2D",
     maxHeight: "60vh !important",
     maxWidth: "80%",
   },
+};
+
+const listStyle = {
+  width: "95%",
+  height: "auto",
+  borderTop: "none",
+  borderLeft: "none",
+  borderRight: "none",
+  borderBottom: "solid orange 1px",
+  marginBottom: "0.6rem",
 };
 
 Modal.setAppElement("#root");
@@ -92,18 +105,22 @@ export default function NewList(props) {
 
   return (
     <>
-      <button id="modal" onClick={openModal}></button>
+      <div id="newList" onClick={openModal}>
+        <div id="hor"></div>
+        <div id="ver"></div>
+      </div>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <div>
+        <div className="modal">
           <input
             type="text"
             placeholder="List name"
             onChange={(e) => setListName(e.target.value)}
+            id="listName"
             required
           />
           <hr />
@@ -113,20 +130,35 @@ export default function NewList(props) {
                   <div key={index}>
                     <form>
                       <input
+                        style={{
+                          display: "none",
+                        }}
                         type="checkbox"
-                        id="finished"
+                        id={`${index}`}
                         onChange={() => (task.isDone = !task.isDone)}
                         defaultChecked={task.isDone}
                       />
+                      <label for={`${index}`}>
+                        <img
+                          style={{
+                            transform: "scale(0.7)",
+                            marginTop: "0.1rem",
+                            marginLeft: "0.1rem",
+                          }}
+                          src={!task.isDone ? box : checked}
+                          alt="box"
+                        />
+                      </label>
                       <input
+                        id="taskName"
                         type="text"
                         placeholder="Task name"
                         onChange={(e) => (task.name = e.target.value)}
                         defaultValue={task.name}
                       />
                     </form>
-                    <button onClick={() => removeTask(index)}>
-                      REMOVE TASK
+                    <button id="remove" onClick={() => removeTask(index)}>
+                      REMOVE
                     </button>
                   </div>
                 );
@@ -134,20 +166,36 @@ export default function NewList(props) {
             : ""}
           <form onSubmit={handleAddTask}>
             <input
+              style={{
+                display: "none",
+              }}
               type="checkbox"
               id="finished"
               value={finished}
               onChange={(e) => setFinished(e.target.checked)}
               checked={finished}
             />
+            <label for="finished">
+              <img
+                style={{
+                  transform: "scale(0.7)",
+                  marginTop: "0.1rem",
+                  marginLeft: "0.1rem",
+                }}
+                src={!finished ? box : checked}
+                alt="box"
+              />
+            </label>
             <input
+              id="taskName"
               type="text"
               placeholder="Task name"
               value={taskName}
+              style={listStyle}
               onChange={(e) => setTaskName(e.target.value)}
               required
             />
-            <input type="submit" value="ADD" />
+            <input id="add" type="submit" value="ADD" />
           </form>
           {message ? <p>{message}</p> : ""}
           <button id="cancel" onClick={() => closeModal()}>

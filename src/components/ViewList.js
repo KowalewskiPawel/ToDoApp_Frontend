@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 
+import box from "../assets/box.png";
+import checked from "../assets/checked.png";
+
 import userService from "../services/user.service";
 
 const customStyles = {
@@ -21,6 +24,16 @@ const customStyles = {
     maxHeight: "60vh !important",
     maxWidth: "80%",
   },
+};
+
+const listStyle = {
+  width: "95%",
+  height: "auto",
+  borderTop: "none",
+  borderLeft: "none",
+  borderRight: "none",
+  borderBottom: "solid orange 1px",
+  marginBottom: "0.6rem",
 };
 
 Modal.setAppElement("#root");
@@ -105,16 +118,19 @@ export default function ViewList(props) {
 
   return (
     <>
-      <button id="modal" onClick={openModal}></button>
+      <button id="viewButton" onClick={openModal}>
+        SHOW LIST
+      </button>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <div>
+        <div className="modal">
           <input
             type="text"
+            id="listName"
             placeholder="List name"
             onChange={(e) => setListName(e.target.value)}
             value={listName}
@@ -127,20 +143,35 @@ export default function ViewList(props) {
                   <div key={index}>
                     <form>
                       <input
+                        style={{
+                          display: "none",
+                        }}
                         type="checkbox"
-                        id="finished"
+                        id={`${index}`}
                         onChange={() => (task.isDone = !task.isDone)}
                         defaultChecked={task.isDone}
                       />
+                      <label for={`${index}`}>
+                        <img
+                          style={{
+                            transform: "scale(0.7)",
+                            marginTop: "0.1rem",
+                            marginLeft: "0.1rem",
+                          }}
+                          src={!task.isDone ? box : checked}
+                          alt="box"
+                        />
+                      </label>
                       <input
                         type="text"
+                        style={listStyle}
                         placeholder="Task name"
                         onChange={(e) => (task.name = e.target.value)}
                         defaultValue={task.name}
                       />
                     </form>
-                    <button onClick={() => removeTask(index)}>
-                      REMOVE TASK
+                    <button id="remove" onClick={() => removeTask(index)}>
+                      REMOVE
                     </button>
                   </div>
                 );
@@ -148,20 +179,36 @@ export default function ViewList(props) {
             : ""}
           <form onSubmit={handleAddTask}>
             <input
+              style={{
+                display: "none",
+              }}
               type="checkbox"
               id="finished"
               value={finished}
               onChange={(e) => setFinished(e.target.checked)}
               checked={finished}
             />
+            <label for="finished">
+              <img
+                style={{
+                  transform: "scale(0.7)",
+                  marginTop: "0.1rem",
+                  marginLeft: "0.1rem",
+                }}
+                src={!finished ? box : checked}
+                alt="box"
+              />
+            </label>
             <input
               type="text"
               placeholder="Task name"
               value={taskName}
+              style={listStyle}
               onChange={(e) => setTaskName(e.target.value)}
               required
             />
-            <input type="submit" value="ADD" />
+
+            <input id="add" type="submit" value="ADD" />
           </form>
           {message ? <p>{message}</p> : ""}
           <button id="cancel" onClick={() => closeModal()}>
