@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/KowalewskiPawel/US_FrontendApp/static/css/main.4aaea0b7.chunk.css",
+    "main.js": "/KowalewskiPawel/US_FrontendApp/static/js/main.55574fba.chunk.js",
+    "main.js.map": "/KowalewskiPawel/US_FrontendApp/static/js/main.55574fba.chunk.js.map",
+    "runtime-main.js": "/KowalewskiPawel/US_FrontendApp/static/js/runtime-main.b7871872.js",
+    "runtime-main.js.map": "/KowalewskiPawel/US_FrontendApp/static/js/runtime-main.b7871872.js.map",
+    "static/js/2.1ce2f95d.chunk.js": "/KowalewskiPawel/US_FrontendApp/static/js/2.1ce2f95d.chunk.js",
+    "static/js/2.1ce2f95d.chunk.js.map": "/KowalewskiPawel/US_FrontendApp/static/js/2.1ce2f95d.chunk.js.map",
+    "index.html": "/KowalewskiPawel/US_FrontendApp/index.html",
+    "static/css/main.4aaea0b7.chunk.css.map": "/KowalewskiPawel/US_FrontendApp/static/css/main.4aaea0b7.chunk.css.map",
+    "static/js/2.1ce2f95d.chunk.js.LICENSE.txt": "/KowalewskiPawel/US_FrontendApp/static/js/2.1ce2f95d.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b7871872.js",
+    "static/js/2.1ce2f95d.chunk.js",
+    "static/css/main.4aaea0b7.chunk.css",
+    "static/js/main.55574fba.chunk.js"
+  ]
+}
