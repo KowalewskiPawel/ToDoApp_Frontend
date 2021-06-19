@@ -31,4 +31,4 @@ based on whether JWT token is available or not
 
 ## Live Version
 
-(https://kowalewskipawel.github.io/US_FrontendApp/)[https://kowalewskipawel.github.io/US_FrontendApp/index.html]
+[https://kowalewskipawel.github.io/US_FrontendApp/](https://kowalewskipawel.github.io/US_FrontendApp/index.html)
