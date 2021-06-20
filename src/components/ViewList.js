@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
+import useForceUpdate from "use-force-update";
 
 import box from "../assets/box.png";
 import checked from "../assets/checked.png";
@@ -47,6 +48,8 @@ export default function ViewList(props) {
   const [tasks, setTasks] = useState([]);
 
   const [message, setMessage] = useState("");
+
+  const forceUpdate = useForceUpdate();
 
   const { id } = props;
 
@@ -147,11 +150,14 @@ export default function ViewList(props) {
                           display: "none",
                         }}
                         type="checkbox"
-                        id={`${index}`}
-                        onChange={() => (task.isDone = !task.isDone)}
+                        id={`task-${index}`}
+                        onChange={() => {
+                          task.isDone = !task.isDone;
+                          forceUpdate();
+                        }}
                         defaultChecked={task.isDone}
                       />
-                      <label for={`${index}`}>
+                      <label for={`task-${index}`}>
                         <img
                           style={{
                             transform: "scale(0.7)",

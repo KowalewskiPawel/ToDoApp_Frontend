@@ -239,6 +239,7 @@ input[type="text"]:focus {
     border: solid black 0px;
     border-radius: 50%;
     transition: transform 100ms ease-in-out;
+
     #hor {
       position: relative;
       bottom: -40%;
@@ -283,6 +284,7 @@ input[type="text"]:focus {
     border: solid black 0px;
     border-radius: 2px;
   }
+
   hr {
     width: 99%;
     color: #ff9900;
@@ -296,6 +298,9 @@ input[type="text"]:focus {
       background: transparent;
       box-shadow: none;
       color: white;
+    }
+    input:focus {
+      border-bottom: solid orange 2px;
     }
 
     #finished {
@@ -312,6 +317,10 @@ input[type="text"]:focus {
       border-right: none;
       border-bottom: solid orange 1px;
       margin-bottom: 0.6rem;
+      transition: transform 100ms ease-in-out;
+    }
+    #taskName:focus {
+      border-bottom: solid orange 2px;
     }
     #add {
       display: block;

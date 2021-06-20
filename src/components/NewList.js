@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
+import useForceUpdate from "use-force-update";
 
 import box from "../assets/box.png";
 import checked from "../assets/checked.png";
@@ -48,6 +49,8 @@ export default function NewList(props) {
 
   const [message, setMessage] = useState("");
 
+  const forceUpdate = useForceUpdate();
+
   function openModal() {
     setIsOpen(true);
     document.getElementById("root").style.filter = "blur(5px)";
@@ -75,9 +78,9 @@ export default function NewList(props) {
     setFinished(false);
   };
 
-  const removeTask = (index) => {
-    const newList = tasks.filter((_, idx) => {
-      return idx !== index;
+  const removeTask = (taskName) => {
+    const newList = tasks.filter((task) => {
+      return task.name !== taskName;
     });
     setTasks([...newList]);
   };
@@ -134,11 +137,14 @@ export default function NewList(props) {
                           display: "none",
                         }}
                         type="checkbox"
-                        id={`${index}`}
-                        onChange={() => (task.isDone = !task.isDone)}
+                        id={`task-${index}`}
+                        onChange={() => {
+                          task.isDone = !task.isDone;
+                          forceUpdate();
+                        }}
                         defaultChecked={task.isDone}
                       />
-                      <label for={`${index}`}>
+                      <label for={`task-${index}`}>
                         <img
                           style={{
                             transform: "scale(0.7)",
@@ -157,7 +163,7 @@ export default function NewList(props) {
                         defaultValue={task.name}
                       />
                     </form>
-                    <button id="remove" onClick={() => removeTask(index)}>
+                    <button id="remove" onClick={() => removeTask(task.name)}>
                       REMOVE
                     </button>
                   </div>
