@@ -1,6 +1,12 @@
+/*  Colors  */
+
+$orange: #ff9900;
+$black: #2d2d2d;
+$red: #ff3d00;
+
 html {
   background: #1a1a1a;
-  color: #ff9900;
+  color: $orange;
 }
 
 input[type="text"]:focus {
@@ -8,7 +14,7 @@ input[type="text"]:focus {
 }
 
 .title {
-  color: #ff9900;
+  color: $orange;
   margin-left: 1rem;
   margin-top: 1rem;
 
@@ -41,7 +47,7 @@ input[type="text"]:focus {
 
   text-align: center;
 
-  background: #2d2d2d;
+  background: $black;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
 
@@ -58,7 +64,7 @@ input[type="text"]:focus {
 
     padding: 4%;
 
-    color: #ff9900;
+    color: $orange;
   }
   input {
     width: 30vw;
@@ -75,7 +81,7 @@ input[type="text"]:focus {
     width: 20vw;
     height: auto;
     color: #ffffff;
-    background: #ff9900;
+    background: $orange;
     border-radius: 4px;
     transition: transform 100ms ease-in-out;
   }
@@ -106,7 +112,7 @@ input[type="text"]:focus {
     font-family: Roboto;
     font-size: 1.4rem;
 
-    color: #ff9900;
+    color: $orange;
     text-decoration: none;
   }
 }
@@ -166,14 +172,14 @@ input[type="text"]:focus {
     justify-content: center;
     align-items: center;
 
-    background: #2d2d2d;
+    background: $black;
     border-radius: 8px;
 
     transition: transform 400ms ease-in-out;
 
     button {
       border: black solid 0px;
-      background: #ff3d00;
+      background: $red;
       padding: 0.4rem;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       border-radius: 4px;
@@ -185,7 +191,7 @@ input[type="text"]:focus {
 
     #viewButton {
       border: black solid 1px;
-      background: #ff9900;
+      background: $orange;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       border-radius: 4px;
       margin: 4px;
@@ -247,8 +253,8 @@ input[type="text"]:focus {
       align-self: flex-end;
       width: 50px;
       height: 1px;
-      background-color: #ff9900;
-      border: 5px solid #ff9900;
+      background-color: $orange;
+      border: 5px solid $orange;
       border-radius: 10px;
     }
     #ver {
@@ -258,8 +264,8 @@ input[type="text"]:focus {
       align-self: flex-end;
       width: 1px;
       height: 50px;
-      background-color: #ff9900;
-      border: 5px solid #ff9900;
+      background-color: $orange;
+      border: 5px solid $orange;
       border-radius: 10px;
     }
   }
@@ -287,8 +293,8 @@ input[type="text"]:focus {
 
   hr {
     width: 99%;
-    color: #ff9900;
-    border: 1px solid #ff9900;
+    color: $orange;
+    border: 1px solid $orange;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -305,7 +311,7 @@ input[type="text"]:focus {
 
     #finished {
       border: solid black 2px;
-      background: #2d2d2d;
+      background: $black;
     }
 
     #taskName {
@@ -325,7 +331,7 @@ input[type="text"]:focus {
     #add {
       display: block;
       margin-left: 89%;
-      background: #ff9900;
+      background: $orange;
       border: solid black 0px;
       font-weight: 400;
       padding: 0.2rem 1rem 0.2rem 1rem;
@@ -343,7 +349,7 @@ input[type="text"]:focus {
   #remove {
     display: block;
     margin-left: 84%;
-    background: #ff3d00;
+    background: $red;
     border: solid black 0px;
     font-weight: 400;
     padding: 0.2rem 1rem 0.2rem 1rem;
@@ -368,7 +374,7 @@ input[type="text"]:focus {
     background: transparent;
     padding: 0.4rem;
     margin: 4px;
-    color: #ff9900;
+    color: $orange;
     font-size: 2rem;
   }
   #cancel:hover {
@@ -378,7 +384,7 @@ input[type="text"]:focus {
     position: fixed;
     top: 90%;
     left: 80%;
-    background: #ff9900;
+    background: $orange;
     border: solid black 0px;
     border-radius: 4px;
     margin: 4px;
