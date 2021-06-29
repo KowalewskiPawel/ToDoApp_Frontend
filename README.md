@@ -28,7 +28,3 @@ based on whether JWT token is available or not
 - Some functions can be divided into smaller/ separate clean functions
 - Styles can be divided into separate modules
 - Responsivness on smaller screens can be improved
-
-## Live Version
-
-[https://kowalewskipawel.github.io/US_FrontendApp/](https://kowalewskipawel.github.io/US_FrontendApp/index.html)
